@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using FeatureToggles.Infrastructure.EntityFramework;
 
@@ -11,7 +12,7 @@ namespace FeatureToggles.Infrastructure
         private readonly object _cacheLock = new object();
         private readonly IFeaturesContext _featuresContext;
 
-        private Dictionary<string, FeatureToggle> _featureToggleCache;
+        private List<Feature> _featureToggleCache;
 
         public PollingFeatureCache(IFeaturesContext featuresContext)
             : this(featuresContext, TimeSpan.FromMinutes(10))
@@ -21,7 +22,7 @@ namespace FeatureToggles.Infrastructure
         public PollingFeatureCache(IFeaturesContext featuresContext, TimeSpan updateInterval)
         {
             _featuresContext = featuresContext;
-            _featureToggleCache = new Dictionary<string, FeatureToggle>();
+            _featureToggleCache = new List<Feature>();
 
             Task.WaitAll(new [] { UpdateFromSource() });
             ScheduleRecurringUpdate(updateInterval);
@@ -31,10 +32,27 @@ namespace FeatureToggles.Infrastructure
         {
             lock (_cacheLock)
             {
-                return _featureToggleCache.ContainsKey(featureName)
-                    ? _featureToggleCache[featureName]
+                return IsRegistered(featureName)
+                    ? GetActiveToggleValue(featureName)
                     : null;
             }
+        }
+
+        public bool IsRegistered(string featureName)
+        {
+            return _featureToggleCache.Any(f => f.Name == featureName);
+        }
+
+        private IFeatureToggle GetActiveToggleValue(string featureName)
+        {
+            var matchingFeatures = _featureToggleCache.Where(f => f.Name == featureName).ToList();
+            var effectiveDatePassed = matchingFeatures.Where(f => f.EffectiveAt.UtcDateTime <= Clock.UtcNow).ToList();
+
+            var activeFeature = effectiveDatePassed    
+                .OrderByDescending(f => f.EffectiveAt)
+                .First();
+
+            return new FeatureToggle(activeFeature.Name, activeFeature.Enabled);
         }
 
         private void ScheduleRecurringUpdate(TimeSpan interval)
@@ -52,9 +70,7 @@ namespace FeatureToggles.Infrastructure
 
         private async Task UpdateFromSource()
         {
-            var features = await _featuresContext.Features.ToDictionaryAsync(
-                    f => f.Name,
-                    f => new FeatureToggle(f.Name, f.Enabled));
+            var features = await _featuresContext.Features.ToListAsync();
 
             lock (_cacheLock)
             {
