@@ -4,7 +4,7 @@ using FeatureToggles.Infrastructure.EntityFramework;
 
 namespace FeatureToggles
 {
-    public class ContainerConfiguration : Module
+    public class FeatureTogglesModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

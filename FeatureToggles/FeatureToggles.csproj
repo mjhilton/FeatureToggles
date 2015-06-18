@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FeatureToggle.cs" />
-    <Compile Include="ContainerConfiguration.cs" />
+    <Compile Include="FeatureTogglesModule.cs" />
     <Compile Include="IFeatureToggle.cs" />
     <Compile Include="Infrastructure\EntityFramework\IFeaturesContext.cs" />
     <Compile Include="Infrastructure\Feature.cs" />

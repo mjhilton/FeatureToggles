@@ -4,7 +4,7 @@ namespace FeatureToggles.Infrastructure.EntityFramework
 {
     public class FeaturesContext : DbContext, IFeaturesContext
     {
-        public FeaturesContext(string nameOrConnectionString)
+        public FeaturesContext(string nameOrConnectionString = "FeaturesContext")
             : base(nameOrConnectionString)
         {
         }
