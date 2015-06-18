@@ -11,9 +11,4 @@ namespace FeatureToggles.Infrastructure.EntityFramework
 
         public IDbSet<Feature> Features { get; set; }
     }
-
-    public interface IFeaturesContext
-    {
-        IDbSet<Feature> Features { get; }
-    }
 }

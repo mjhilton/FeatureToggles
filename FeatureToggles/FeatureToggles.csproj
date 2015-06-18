@@ -55,7 +55,7 @@
     <Compile Include="FeatureToggle.cs" />
     <Compile Include="ContainerConfiguration.cs" />
     <Compile Include="IFeatureToggle.cs" />
-    <Compile Include="Infrastructure\EntityFramework\EntityFrameworkFeatureRepository.cs" />
+    <Compile Include="Infrastructure\EntityFramework\IFeaturesContext.cs" />
     <Compile Include="Infrastructure\Feature.cs" />
     <Compile Include="Infrastructure\EntityFramework\FeaturesContext.cs" />
     <Compile Include="Infrastructure\PollingFeatureCache.cs" />
