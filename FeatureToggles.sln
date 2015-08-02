@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureToggles", "FeatureTo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureToggles.Tests", "FeatureToggles.Tests\FeatureToggles.Tests.csproj", "{932D13C4-E56A-48CD-AACA-59DF8AF6CBBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureToggles.Dashboard", "FeatureToggles.Dashboard\FeatureToggles.Dashboard.csproj", "{0E00E629-38EC-4BA8-BDF1-A3CDAAA853EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{932D13C4-E56A-48CD-AACA-59DF8AF6CBBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{932D13C4-E56A-48CD-AACA-59DF8AF6CBBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{932D13C4-E56A-48CD-AACA-59DF8AF6CBBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E00E629-38EC-4BA8-BDF1-A3CDAAA853EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E00E629-38EC-4BA8-BDF1-A3CDAAA853EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E00E629-38EC-4BA8-BDF1-A3CDAAA853EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E00E629-38EC-4BA8-BDF1-A3CDAAA853EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

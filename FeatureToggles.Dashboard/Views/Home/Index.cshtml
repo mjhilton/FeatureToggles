@@ -1,0 +1,18 @@
+﻿<div ng-app="featureToggles" class="row">
+    <div ng-controller="features" class="col-sm-12">
+        <table st-table="features">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Current Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="feature in features">
+                    <td>{{feature.name}}</td>
+                    <td>{{feature.currentStatus}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
