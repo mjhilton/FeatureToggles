@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FeatureToggles.Infrastructure;
 
 namespace FeatureToggles
@@ -9,13 +10,18 @@ namespace FeatureToggles
         private static bool _initialised;
         
         private static bool _defaultValue;
-        private static IFeatureProvider _featureProvider;
+        private static IList<IFeatureProvider> _featureProviders;
 
         internal static void Initialise(IFeatureProvider provider, bool defaultToggleValue = false)
         {
+            Initialise(new [] { provider }, defaultToggleValue);
+        }
+
+        internal static void Initialise(IList<IFeatureProvider> providers, bool defaultToggleValue = false)
+        {
             lock (InitialisationLock)
             {
-                _featureProvider = provider;
+                _featureProviders = providers;
                 _defaultValue = defaultToggleValue;
                 _initialised = true;
             }
@@ -26,11 +32,17 @@ namespace FeatureToggles
         {
             if (!_initialised) throw new InvalidOperationException("Features not initialised. Make sure you've configured a feature provider during app startup.");
 
-            var feature = _featureProvider.Get(typeof (T).Name);
+            foreach (var provider in _featureProviders)
+            {
+                var feature = provider.Get(typeof(T).Name);
+                
+                if (feature == null) 
+                    continue;
+                
+                return feature.Enabled;
+            }
 
-            return (feature != null)
-                ? feature.Enabled
-                : _defaultValue;
+            return _defaultValue;
         }
     }
 }

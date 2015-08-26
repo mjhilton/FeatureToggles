@@ -1,18 +1,14 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FeatureToggles.Infrastructure;
 
 namespace FeatureToggles.Mvc
 {
     public static class FeatureConfig
     {
-        public static void UsePollingSqlProvider(string nameOrConnectionString, bool defaultToggleValue = false)
+        public static void UseProviders(IEnumerable<IFeatureProvider> providers, bool defaultValue = false)
         {
-            Features.Initialise(new PollingCacheFeatureProvider(nameOrConnectionString), defaultToggleValue);
-        }
-
-        public static void UsePollingSqlProvider(string nameOrConnectionString, TimeSpan pollingInterval, bool defaultToggleValue = false)
-        {
-            Features.Initialise(new PollingCacheFeatureProvider(nameOrConnectionString, pollingInterval), defaultToggleValue);
+            Features.Initialise(providers.ToList(), defaultValue);
         }
     }
 }

@@ -7,7 +7,7 @@ using FeatureToggles.Infrastructure.EntityFramework;
 
 namespace FeatureToggles.Infrastructure
 {
-    class PollingCacheFeatureProvider : IFeatureProvider
+    public class PollingCacheFeatureProvider : IFeatureProvider
     {
         private readonly object _cacheLock = new object();
         private readonly IFeaturesContext _featuresContext;
@@ -24,12 +24,12 @@ namespace FeatureToggles.Infrastructure
         {
         }
 
-        public PollingCacheFeatureProvider(IFeaturesContext featuresContext)
+        internal PollingCacheFeatureProvider(IFeaturesContext featuresContext)
             : this(featuresContext, TimeSpan.FromMinutes(10))
         {
         }
 
-        public PollingCacheFeatureProvider(IFeaturesContext featuresContext, TimeSpan updateInterval)
+        internal PollingCacheFeatureProvider(IFeaturesContext featuresContext, TimeSpan updateInterval)
         {
             _featuresContext = featuresContext;
             _featureToggleCache = new List<Feature>();
