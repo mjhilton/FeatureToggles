@@ -52,6 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\FeatureManager.cs" />
+    <Compile Include="Admin\FeatureSchedule.cs" />
+    <Compile Include="Admin\FeatureToggleAdminModule.cs" />
+    <Compile Include="Admin\IFeatureManager.cs" />
     <Compile Include="Features.cs" />
     <Compile Include="FeatureToggle.cs" />
     <Compile Include="IFeatureToggle.cs" />

@@ -1,4 +1,5 @@
-﻿using FeatureToggles.Infrastructure;
+﻿using System;
+using FeatureToggles.Infrastructure;
 
 namespace FeatureToggles.Mvc
 {
@@ -7,6 +8,11 @@ namespace FeatureToggles.Mvc
         public static void UsePollingSqlProvider(string nameOrConnectionString, bool defaultToggleValue = false)
         {
             Features.Initialise(new PollingCacheFeatureProvider(nameOrConnectionString), defaultToggleValue);
+        }
+
+        public static void UsePollingSqlProvider(string nameOrConnectionString, TimeSpan pollingInterval, bool defaultToggleValue = false)
+        {
+            Features.Initialise(new PollingCacheFeatureProvider(nameOrConnectionString, pollingInterval), defaultToggleValue);
         }
     }
 }

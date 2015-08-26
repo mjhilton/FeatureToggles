@@ -11,7 +11,7 @@ namespace FeatureToggles
         private static bool _defaultValue;
         private static IFeatureProvider _featureProvider;
 
-        public static void Initialise(IFeatureProvider provider, bool defaultToggleValue = false)
+        internal static void Initialise(IFeatureProvider provider, bool defaultToggleValue = false)
         {
             lock (InitialisationLock)
             {

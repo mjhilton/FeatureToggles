@@ -15,7 +15,12 @@ namespace FeatureToggles.Infrastructure
         private List<Feature> _featureToggleCache;
 
         public PollingCacheFeatureProvider(string nameOrConnectionString)
-            : this (new FeaturesContext(nameOrConnectionString))
+            : this(new FeaturesContext(nameOrConnectionString))
+        {
+        }
+
+        public PollingCacheFeatureProvider(string nameOrConnectionString, TimeSpan updateInterval)
+            : this (new FeaturesContext(nameOrConnectionString), updateInterval)
         {
         }
 
@@ -75,7 +80,7 @@ namespace FeatureToggles.Infrastructure
 
         private async Task UpdateFromSource()
         {
-            var features = await _featuresContext.Features.ToListAsync();
+            var features = await _featuresContext.Features.AsNoTracking().ToListAsync();
 
             lock (_cacheLock)
             {
