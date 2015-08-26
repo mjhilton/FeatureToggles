@@ -22,7 +22,7 @@ namespace FeatureToggles.Tests
                 new Feature { Name = "Test2" }
             }));
 
-            var pollingFeatureCache = new PollingFeatureCache(featureContext);
+            var pollingFeatureCache = new PollingCacheFeatureProvider(featureContext);
 
             Assert.IsNotNull(pollingFeatureCache.Get("Test1"));
         }
@@ -35,7 +35,7 @@ namespace FeatureToggles.Tests
                 new Feature { Name = "Test1" },
                 new Feature { Name = "Test2" }
             });
-            var pollingFeatureCache = new PollingFeatureCache(featureContext, TimeSpan.FromMilliseconds(100));
+            var pollingFeatureCache = new PollingCacheFeatureProvider(featureContext, TimeSpan.FromMilliseconds(100));
             Assert.IsNull(pollingFeatureCache.Get("Test3"));
             featureContext.Features.Add(new Feature { Name = "Test3" });
             
@@ -52,7 +52,7 @@ namespace FeatureToggles.Tests
                 new Feature {Name = "Test1"},
                 new Feature {Name = "Test2"}
             });
-            var pollingFeatureCache = new PollingFeatureCache(featureContext, TimeSpan.FromMilliseconds(100));
+            var pollingFeatureCache = new PollingCacheFeatureProvider(featureContext, TimeSpan.FromMilliseconds(100));
             Assert.IsNull(pollingFeatureCache.Get("Test3"));
             Thread.Sleep(200);
             featureContext.Features.Add(new Feature { Name = "Test3" });
@@ -70,7 +70,7 @@ namespace FeatureToggles.Tests
                 new Feature { Name = "Feature1", EffectiveAt = new DateTimeOffset(2015, 01, 01, 12, 00, 00, TimeSpan.Zero), Enabled = true },
                 new Feature { Name = "Feature1", EffectiveAt = new DateTimeOffset(2015, 01, 01, 17, 00, 00, TimeSpan.Zero), Enabled = false }
             });
-            var pollingFeatureCache = new PollingFeatureCache(featureContext);
+            var pollingFeatureCache = new PollingCacheFeatureProvider(featureContext);
 
             Clock.Freeze(new DateTime(2015, 01, 01, 12, 00, 00));
             Assert.IsTrue(pollingFeatureCache.Get("Feature1").Enabled);

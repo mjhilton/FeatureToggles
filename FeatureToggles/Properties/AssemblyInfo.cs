@@ -22,6 +22,11 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("83ac4fe3-f640-498f-b35c-faa3dc20e4b9")]
 
+[assembly: InternalsVisibleTo("FeatureToggles.Mvc")]
+
+[assembly: InternalsVisibleTo("FeatureToggles.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version

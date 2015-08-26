@@ -2,7 +2,7 @@
 
 namespace FeatureToggles.Infrastructure.EntityFramework
 {
-    public interface IFeaturesContext
+    interface IFeaturesContext
     {
         IDbSet<Feature> Features { get; }
     }

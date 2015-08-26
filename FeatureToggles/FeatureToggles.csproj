@@ -52,15 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features.cs" />
     <Compile Include="FeatureToggle.cs" />
-    <Compile Include="FeatureTogglesModule.cs" />
     <Compile Include="IFeatureToggle.cs" />
     <Compile Include="Infrastructure\EntityFramework\IFeaturesContext.cs" />
     <Compile Include="Infrastructure\Feature.cs" />
     <Compile Include="Infrastructure\EntityFramework\FeaturesContext.cs" />
-    <Compile Include="Infrastructure\PollingFeatureCache.cs" />
-    <Compile Include="Infrastructure\IFeatures.cs" />
-    <Compile Include="Infrastructure\Time.cs" />
+    <Compile Include="Infrastructure\PollingCacheFeatureProvider.cs" />
+    <Compile Include="Infrastructure\IFeatureProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

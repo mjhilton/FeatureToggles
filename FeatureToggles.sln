@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureToggles", "FeatureToggles\FeatureToggles.csproj", "{83837FF0-A693-4CEA-9EC5-EC4A670B1177}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureToggles.Tests", "FeatureToggles.Tests\FeatureToggles.Tests.csproj", "{932D13C4-E56A-48CD-AACA-59DF8AF6CBBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureToggles.Dashboard", "FeatureToggles.Dashboard\FeatureToggles.Dashboard.csproj", "{0E00E629-38EC-4BA8-BDF1-A3CDAAA853EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureToggles.Mvc", "FeatureToggles.Mvc\FeatureToggles.Mvc.csproj", "{77F0F7ED-397F-448D-9536-90F3C19286B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{932D13C4-E56A-48CD-AACA-59DF8AF6CBBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{932D13C4-E56A-48CD-AACA-59DF8AF6CBBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{932D13C4-E56A-48CD-AACA-59DF8AF6CBBF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E00E629-38EC-4BA8-BDF1-A3CDAAA853EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E00E629-38EC-4BA8-BDF1-A3CDAAA853EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E00E629-38EC-4BA8-BDF1-A3CDAAA853EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E00E629-38EC-4BA8-BDF1-A3CDAAA853EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77F0F7ED-397F-448D-9536-90F3C19286B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F0F7ED-397F-448D-9536-90F3C19286B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77F0F7ED-397F-448D-9536-90F3C19286B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77F0F7ED-397F-448D-9536-90F3C19286B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
