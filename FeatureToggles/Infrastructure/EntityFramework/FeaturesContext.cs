@@ -10,5 +10,10 @@ namespace FeatureToggles.Infrastructure.EntityFramework
         }
 
         public IDbSet<Feature> Features { get; set; }
+
+        public void Save()
+        {
+            SaveChanges();
+        }
     }
 }

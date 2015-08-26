@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using FeatureToggles.Infrastructure.EntityFramework;
 
 namespace FeatureToggles.Admin
 {
@@ -8,6 +9,7 @@ namespace FeatureToggles.Admin
         {
             base.Load(builder);
 
+            builder.RegisterType<FeaturesContext>().As<IFeaturesContext>();
             builder.RegisterType<FeatureManager>().As<IFeatureManager>();
         }
     }

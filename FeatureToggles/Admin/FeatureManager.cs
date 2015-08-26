@@ -10,23 +10,24 @@ namespace FeatureToggles.Admin
     {
         private readonly IFeaturesContext _context;
 
-        public FeatureManager(IFeaturesContext context)
+        public FeatureManager(FeatureManagerConfiguration config)
         {
-            _context = context;
+            _context = new FeaturesContext(config.NameOrConnectionString);
         }
 
         public IEnumerable<FeatureSchedule> GetAll()
         {
             var features = _context.Features
-                .OrderBy(f => f.EffectiveAt)
                 .GroupBy(f => f.Name)
                 .ToList();
 
             foreach (var feature in features)
             {
-                var pastValues = feature.TakeWhile(f => f.EffectiveAt.UtcDateTime < Clock.UtcNow).ToList();
-                var currentValue = pastValues.Last();
-                var futureValues = feature.Except(pastValues);
+                var scheduledValues = feature.OrderBy(f => f.EffectiveAt);
+
+                var pastValues = scheduledValues.TakeWhile(f => f.EffectiveAt.UtcDateTime < Clock.UtcNow).ToList();
+                var currentValue = pastValues.LastOrDefault();
+                var futureValues = scheduledValues.Except(pastValues);
                 
                 yield return new FeatureSchedule
                 {
@@ -42,6 +43,7 @@ namespace FeatureToggles.Admin
             if (_context.Features.Any(f => f.Name == name)) throw new InvalidOperationException(string.Format("Feature '{0}' already exists.", name));
 
             _context.Features.Add(new Feature(name, defaultValue));
+            _context.Save();
         }
 
         public void Update(string name, bool newValue)
@@ -51,6 +53,7 @@ namespace FeatureToggles.Admin
             if (existing.Count() > 1) throw new InvalidOperationException(string.Format("Feature '{0}' has existing scheduled values. Remove these first.", name));
 
             existing.Single().Enabled = newValue;
+            _context.Save();
         }
 
         public void Schedule(string name, DateTimeOffset effectiveTime, bool newValue)
@@ -66,6 +69,8 @@ namespace FeatureToggles.Admin
             {
                 _context.Features.Add(new Feature(name, newValue) { EffectiveAt = effectiveTime });
             }
+
+            _context.Save();
         }
 
         public void Deschedule(string name, DateTimeOffset effectiveTime)
@@ -76,6 +81,8 @@ namespace FeatureToggles.Admin
 
             foreach (var scheduledValue in existing)
                 _context.Features.Remove(scheduledValue);
+
+            _context.Save();
         }
 
         public void Remove(string name)
@@ -86,6 +93,8 @@ namespace FeatureToggles.Admin
 
             foreach (var scheduledValue in existing)
                 _context.Features.Remove(scheduledValue);
+
+            _context.Save();
         }
     }
 }
