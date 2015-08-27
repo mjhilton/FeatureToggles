@@ -6,10 +6,10 @@ namespace FeatureToggles.Admin
     public interface IFeatureManager
     {
         IEnumerable<FeatureSchedule> GetAll();
-        void Add(string name, bool defaultValue);
-        void Update(string name, bool newValue);
-        void Schedule(string name, DateTimeOffset effectiveTime, bool newValue);
-        void Deschedule(string name, DateTimeOffset effectiveTime);
-        void Remove(string name);
+        TryResult Add(string name, bool defaultValue);
+        TryResult Update(string name, bool newValue);
+        TryResult Schedule(string name, DateTimeOffset effectiveTime, bool newValue);
+        TryResult Deschedule(string name, DateTimeOffset effectiveTime);
+        TryResult Remove(string name);
     }
 }

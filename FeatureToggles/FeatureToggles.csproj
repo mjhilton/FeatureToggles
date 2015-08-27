@@ -58,6 +58,7 @@
     <Compile Include="Admin\FeatureSchedule.cs" />
     <Compile Include="Admin\FeatureToggleAdminModule.cs" />
     <Compile Include="Admin\IFeatureManager.cs" />
+    <Compile Include="Admin\TryResult.cs" />
     <Compile Include="Features.cs" />
     <Compile Include="FeatureToggle.cs" />
     <Compile Include="IFeatureToggle.cs" />
